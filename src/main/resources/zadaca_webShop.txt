@@ -1,0 +1,28 @@
+U fajlu WEB-INF/products.txt ( imitaciji baze) se nalaze svi produkti
+koji se nude u vašem WEB shopu.
+
+Prvi dio zadatka:
+Prikazati kroz WebShopServlet listu dostupnih proizvoda i izložiti
+naš webShopServlet na adresi "/products" u vidu dinamičke tabele.
+Dinamička tabela predstavlja html table čiji se podaci pune iz WEB-INF/products.txt.
+Dakle kolone dinamičke tabele su:
+ - name
+ - price
+ - form kolona: quantity (korisnički unos/input za količinu), dugme dodaj(hint: input type=submit)
+
+
+ Drugi dio zadatka:
+ Forma iz WebShopServlet tačnije iz dinamičke tabele gađa ShoppingCartServlet i puni
+ vašu ShoppingCart listu.
+ HINT: ShoppingCartServlet treba da provjeri da li uopće u vašoj sesiji postoji korpa(ShoppingCart)
+ Ukoliko ne postoji prvi put treba da je kreira i doda u sesiju.
+ Svako sljedeće dodavanje artikla treba da ažurira, a ne doda novu korpu.
+ Prijedlog: Konstruisati ShoppingCart i ShoppingCartItem modele(klase)
+
+ ShoppingCartServlet treba da prikaže uvijek dodane artikle u korpi u vidu tabele.
+ Kolone u toj tabeli su:
+   - product name
+   - unit price
+   - quantity
+   - total price
+

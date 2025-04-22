@@ -1,0 +1,25 @@
+1;Nike Patike;200.34
+2;MacBook Pro M4;6500.00
+3;MacBook Pro M4Max;7900.23
+4;Dell XPS;6500.32
+5;Dell U3224;1200.10
+6;Samsung Galaxy S24;1200.99
+7;iPhone 15 Pro Max;1350.49
+8;Sony PlayStation 5;499.99
+9;Apple Watch Ultra;799.99
+10;LG OLED TV 55";1799.99
+11;Bose Noise Cancelling Headphones;299.50
+12;GoPro Hero 12;399.89
+13;Microsoft Surface Laptop 6;2499.99
+14;Lenovo ThinkPad X1 Carbon;2200.10
+15;Razer Gaming Mouse Viper;89.99
+16;Corsair Mechanical Keyboard K95;199.99
+17;ASUS ROG Gaming Monitor;899.99
+18;DJI Mini 4 Pro Drone;749.99
+19;Nikon Z8 Kamera;3799.99
+20;Canon EOS R5;3499.99
+21;Tesla Powerwall;7500.99
+22;Dyson Airwrap Styler;599.50
+23;KitchenAid Stand Mixer;349.99
+24;Philips Hue Smart Lights;129.99
+25;Google Nest Hub Max;229.99

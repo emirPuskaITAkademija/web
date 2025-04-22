@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
     private void handleRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+
         User user = userRepository.login(username, password);
         if (user != null) {
             resp.sendRedirect(req.getContextPath() + "/");
