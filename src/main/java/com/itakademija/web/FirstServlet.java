@@ -18,6 +18,8 @@ import java.io.PrintWriter;
  *     <li>2.1 web.xml - deployment descriptor  </li>
  *     <li>2.2</li>
  * </li>
+ *
+ * FristServlet firstServlet = new FirstServlet()
  */
 public class FirstServlet extends HttpServlet {
 
