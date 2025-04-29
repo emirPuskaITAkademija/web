@@ -29,21 +29,8 @@ public class WebShopServlet extends HttpServlet {
         ServletContext servletContext = getServletContext();
         List<Product> products = (List<Product>) servletContext.getAttribute(PRODUCTS);
         if (products == null) {
-            products = new ArrayList<>();
             String path = servletContext.getRealPath("WEB-INF/products.txt");
-            try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    String[] lineParts = line.split(";");
-                    Long id = Long.parseLong(lineParts[0]);
-                    String name = lineParts[1];
-                    double price = Double.parseDouble(lineParts[2]);
-                    Product product = new Product(id, name, price);
-                    products.add(product);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e.getMessage());
-            }
+            products = new ProductReader(path).read();
             servletContext.setAttribute(PRODUCTS, products);
         }
     }
@@ -59,11 +46,40 @@ public class WebShopServlet extends HttpServlet {
     }
 
     private void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        try (PrintWriter out = response.getWriter()) {
-            ServletContext servletContext = getServletContext();
-            List<Product> products = (List<Product>) servletContext.getAttribute(PRODUCTS);
-            out.println("Ukupno " + products.size());
+        response.setContentType("text/html;charset=UTF-8");
+
+        try(PrintWriter out = response.getWriter()) {
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Available Products</title>");
+            out.println("</head>");
+            out.println("<body>");
+            List<Product> products = (List<Product>) getServletContext().getAttribute(PRODUCTS);
+            if(products != null && !products.isEmpty()) {
+                out.println("<h1>Available Products</h1>");
+                out.println("<table border='1'>");
+                out.println("<tr><th>Naziv</th><th>Cijena</th><th>Korpa</th></tr>");
+                for(Product product : products) {
+                    out.println("<tr>");
+                    out.println("<td>" + product.getName()+"</td>");
+                    out.println("<td>"+product.getPrice()+"</td>");
+                    out.println("<td>");
+                    out.println("""
+                            <form action="cart" method=GET>
+                                <input type='number' name='quantity' size='4'/>
+                                <input type='hidden' value='%s' name='productId'/>
+                                <input type='submit' value='Dodaj'/>
+                            </form>
+                            """.formatted(product.getId()));
+                    out.println("</td>");
+                    out.println("</tr>");
+                }
+                out.println("</table>");
+            }else{
+                out.println("<h1>Trenutno nismo u mogućnosti prikazati aritkle u našem web shopu</h1>");
+            }
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 }
