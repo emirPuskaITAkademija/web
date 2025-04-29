@@ -68,13 +68,16 @@ public class WebShopServlet extends HttpServlet {
                             <form action="cart" method=GET>
                                 <input type='number' name='quantity' size='4'/>
                                 <input type='hidden' value='%s' name='productId'/>
-                                <input type='submit' value='Dodaj'/>
-                            </form>
+                      
                             """.formatted(product.getId()));
                     out.println("</td>");
                     out.println("</tr>");
                 }
                 out.println("</table>");
+                out.println("""
+                            <input type='submit' value='Dodaj'/>
+                            </form>
+                            """);
             }else{
                 out.println("<h1>Trenutno nismo u mogućnosti prikazati aritkle u našem web shopu</h1>");
             }

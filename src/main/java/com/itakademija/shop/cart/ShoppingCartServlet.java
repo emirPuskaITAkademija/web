@@ -40,22 +40,30 @@ public class ShoppingCartServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Shopping Cart</h1>");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            List<Product> products = (List<Product>) getServletContext().getAttribute(PRODUCTS);
-            Product product = products
-                    .stream()
-                    .filter(p -> p.getId() == productId)
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Product not found"));
-
             HttpSession session = request.getSession();
             ShoppingCart cart = (ShoppingCart) session.getAttribute(CART);
             if (cart == null) {
                 cart = new ShoppingCart();
                 session.setAttribute(CART, cart);
             }
-            cart.addItem(product, quantity);
+            String[] productIds = request.getParameterValues("productId");
+            String[] quantities = request.getParameterValues("quantity");
+            for (int i = 0; i < productIds.length; i++) {
+                String productIdText = productIds[i];
+                String quantityText = quantities[i];
+                if (quantityText.isEmpty()) {
+                    continue;
+                }
+                int quantity = Integer.parseInt(quantityText);
+                int productId = Integer.parseInt(productIdText);
+                List<Product> products = (List<Product>) getServletContext().getAttribute(PRODUCTS);
+                Product product = products
+                        .stream()
+                        .filter(p -> p.getId() == productId)
+                        .findFirst()
+                        .orElseThrow(() -> new RuntimeException("Product not found"));
+                cart.addItem(product, quantity);
+            }
             if (cart.getItems() == null || cart.getItems().isEmpty()) {
                 out.println("<h1> Korpa je prazna </h1>");
             } else {
